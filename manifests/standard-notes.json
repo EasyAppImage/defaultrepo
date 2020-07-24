@@ -1,0 +1,56 @@
+{
+  "manifest_name": "standard-notes",
+  "friendly_name": "Standard Notes",
+  "spdx_license": "GPLv3",
+  "description": "A free, open-source, and completely encrypted notes app.",
+  "architechture": "x64",
+  "type": "managed",
+  "version": "3.4.1",
+  "installation_steps": {
+    "steps": {
+      "download": {
+        "function": "download",
+        "options": {
+          "url": "https://github.com/standardnotes/desktop/releases/download/v3.4.1/Standard-Notes-3.4.1.AppImage",
+          "okToCache": true
+        }
+      },
+      "checksum": {
+        "function": "checksum",
+        "options": {
+          "algorithm": "SHA-512",
+          "hash": ""
+        }
+      },
+      "set_executable": {
+        "function": "setfileattr",
+        "options": {
+          "path": "$APPIX_DOWNLOAD_DIR/Standard-Notes-3.4.1.AppImage",
+          "attribute": "x"
+        }
+      },
+      "move_to_install_location": {
+        "function": "movefile",
+        "options": {
+          "origin": "$APPIX_DOWNLOAD_DIR/Standard-Notes-3.4.1.AppImage",
+          "destination": "$APPIX_INSTALL_DIR/standard-notes/3.4.1/"
+        }
+      },
+      "symlink_to_current": {
+        "function": "symlink",
+        "options": {
+          "deleteOldSymlink": true,
+          "origin": "$APPIX_INSTALL_DIR/standard-notes/3.4.1/",
+          "destination": "$APPIX_INSTALL_DIR/standard-notes/current/"
+        }
+      },
+      "make_desktop_shortcut": {
+        "function": "make_desktop_file",
+        "options": {
+          "file": "$APPIX_INSTALL_DIR/standard-notes/current/Standard-Notes-3.4.1.AppImage"
+        }
+      }
+    },
+    "execution_order": ["download", "checksum", "set_executable", "move_to_install_location", "symlink_to_current", "make_desktop_shortcuts"]
+  }
+}
